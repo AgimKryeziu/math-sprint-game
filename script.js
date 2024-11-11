@@ -22,6 +22,20 @@ const playAgainBtn = document.querySelector(".play-again");
 let questionAmuont = 0;
 let equationsArray = [];
 
+// Display 3, 2, 1, GO
+function countdownStart() {
+  countdown.textContent = "3";
+  setTimeout(() => {
+    countdown.textContent = "2";
+  }, 1000);
+  setTimeout(() => {
+    countdown.textContent = "1";
+  }, 2000);
+  setTimeout(() => {
+    countdown.textContent = "GO!";
+  }, 3000);
+}
+
 // Switch selected input styling
 startForm.addEventListener("click", () => {
   radioContainers.forEach((radioEl) => {
@@ -33,6 +47,13 @@ startForm.addEventListener("click", () => {
     }
   });
 });
+
+// Navigate from Splash Page to Countdown Page
+function showCountdown() {
+  countdownPage.hidden = false;
+  splashPage.hidden = true;
+  countdownStart();
+}
 
 // Get the value from selected radio button
 function getRadioValue() {
@@ -50,6 +71,10 @@ function selectQuestionAmount(e) {
   e.preventDefault();
   questionAmount = getRadioValue();
   console.log("question amount:", questionAmount);
+  if (questionAmount) {
+    showCountdown();
+  }
 }
+
 // Event Listeners
 startForm.addEventListener("submit", selectQuestionAmount);
